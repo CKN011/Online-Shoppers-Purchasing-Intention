@@ -485,9 +485,11 @@ def interactive_prediction_page(df):
             value=float(df['BounceRates'].mean()),
             step=0.01
         )
-        weekend = st.checkbox(
-            "Wochenende?",
-            value=False
+        
+        visitor_type = st.selectbox(
+            "Besuchertyp",
+            options=df['VisitorType'].unique(),
+            index=0
         )
         
     
@@ -522,11 +524,9 @@ def interactive_prediction_page(df):
             value=float(df['ExitRates'].mean()),
             step=0.01
         )
-        
-        visitor_type = st.selectbox(
-            "Besuchertyp",
-            options=df['VisitorType'].unique(),
-            index=0
+        weekend = st.checkbox(
+            "Wochenende?",
+            value=False
         )
     
         os = st.selectbox(
