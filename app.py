@@ -471,74 +471,6 @@ def interactive_prediction_page(df):
         col1, col2, col3 = st.columns(3)
         
         with col1:
-                "Besuchertyp",
-                options=df['VisitorType'].unique(),
-                index=0
-            )
-            
-                "Browser",
-                options=sorted(df['Browser'].unique()),
-                index=0
-            )
-            
-                "Betriebssystem",
-                options=sorted(df['OperatingSystems'].unique()),
-                index=0
-            )
-        
-        with col2:
-            month = st.selectbox(
-                "Monat",
-                options=sorted(df['Month'].unique()),
-                index=0
-            )
-            
-            weekend = st.checkbox(
-                "Wochenende?",
-                value=False
-            )
-            
-                "Nähe zu einem speziellen Tag (0 = weit entfernt, 1 = sehr nah)",
-                min_value=0.0,
-                max_value=1.0,
-                value=0.0,
-                step=0.1
-            )
-        
-        with col3:
-                "Page Values",
-                min_value=0.0,
-                max_value=float(df['PageValues'].max()),
-                value=0.0,
-                step=10.0
-            )
-            
-                "Bounce Rates",
-                min_value=0.0,
-                max_value=float(df['BounceRates'].max()),
-                value=float(df['BounceRates'].mean()),
-                step=0.01
-            )
-            
-                "Exit Rates",
-                min_value=0.0,
-                max_value=float(df['ExitRates'].max()),
-                value=float(df['ExitRates'].mean()),
-                step=0.01
-            )
-        
-        # Page visit sliders
-        st.subheader("Seitenbesuche und Verweildauer")
-        
-        col1, col2 = st.columns(2)
-        
-        with col1:
-                "Administrative Seiten Besuche",
-                min_value=0,
-                max_value=int(df['Administrative'].max()),
-                value=0
-            )
-            
             informational = st.slider(
                 "Informational Seiten Besuche",
                 min_value=0,
@@ -546,52 +478,85 @@ def interactive_prediction_page(df):
                 value=0
             )
             
-                "Product Related Seiten Besuche",
-                min_value=0,
-                max_value=int(df['ProductRelated'].max()),
-                value=0
+            "Bounce Rates",
+                min_value=0.0,
+                max_value=float(df['BounceRates'].max()),
+                value=float(df['BounceRates'].mean()),
+                step=0.01
+            )
+            
+            "Exit Rates",
+                min_value=0.0,
+                max_value=float(df['ExitRates'].max()),
+                value=float(df['ExitRates'].mean()),
+                step=0.01
+            )
+            
+
+            
+            
+                "Besuchertyp",
+                options=df['VisitorType'].unique(),
+                index=0
+            )
+            
+            
+                "Betriebssystem",
+                options=sorted(df['OperatingSystems'].unique()),
+                index=0
             )
         
         with col2:
-                "Administrative Seiten Verweildauer (s)",
+              "Page Values",
                 min_value=0.0,
-                max_value=float(df['Administrative_Duration'].max()),
-                value=0.0
+                max_value=float(df['PageValues'].max()),
+                value=0.0,
+                step=10.0
             )
             
-            informational_duration = st.slider(
-                "Informational Seiten Verweildauer (s)",
+                "Nähe zu einem speziellen Tag (0 = weit entfernt, 1 = sehr nah)",
                 min_value=0.0,
-                max_value=float(df['Informational_Duration'].max()),
-                value=0.0
+                max_value=1.0,
+                value=0.0,
+                step
+
+
+            month = st.selectbox(
+                "Monat",
+                options=sorted(df['Month'].unique()),
+                index=0
+            )
+
+         with col3:
+
+            weekend = st.checkbox(
+                "Wochenende?",
+                value=False
+            )
+             "Besuchertyp",
+                options=df['VisitorType'].unique(),
+                index=0
             )
             
-                "Product Related Seiten Verweildauer (s)",
-                min_value=0.0,
-                max_value=float(df['ProductRelated_Duration'].max()),
-                value=0.0
+            
+                "Betriebssystem",
+                options=sorted(df['OperatingSystems'].unique()),
+                index=0
             )
-        
+            
+                
         # Create input dataframe for prediction
         if st.button("Vorhersage treffen"):
             with st.spinner("Berechnung läuft..."):
                 # Create input data
                 input_data = pd.DataFrame({
-                    'Administrative': [administrative],
-                    'Administrative_Duration': [administrative_duration],
                     'Informational': [informational],
-                    'Informational_Duration': [informational_duration],
-                    'ProductRelated': [product_related],
-                    'ProductRelated_Duration': [product_related_duration],
                     'BounceRates': [bounce_rates],
                     'ExitRates': [exit_rates],
                     'PageValues': [page_values],
                     'SpecialDay': [special_day],
                     'Month': [month],
                     'OperatingSystems': [os],
-                    'Browser': [browser],
-                    'Region': [df['Region'].mode()[0]],  # Use most common region
-                    'TrafficType': [df['TrafficType'].mode()[0]],  # Use most common traffic type
                     'VisitorType': [visitor_type],
                     'Weekend': [weekend]
                 })
