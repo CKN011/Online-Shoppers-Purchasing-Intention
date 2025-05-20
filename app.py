@@ -99,7 +99,7 @@ def main():
 def data_overview_page(df):
     st.header("Online Shoppers Purchasing Intention Dataset")
     
-    # Display basic info about the dataset
+    # Infos zum Datenset
     st.subheader("Übersicht zum UCI-Datensatz")
     
     col1, col2, col3 = st.columns(3)
@@ -212,9 +212,9 @@ def data_overview_page(df):
                     'Durchschnittl. Besuchsdauer (s)': f"{visitor_df['ProductRelated_Duration'].mean():.2f}"
                 }
                 
-            # Erstelle DataFrame für die Besuchertyp-Analyse, aber transponiere ihn für bessere Darstellung
+            # DataFrame für die Besuchertyp-Analyse, transponiert für bessere Darstellung
             visitor_df = pd.DataFrame(visitor_metrics).T
-            # Konvertiere alle Spalten zum String-Format, um Arrow-Kompatibilität sicherzustellen
+            # Konvertiert alle Spalten zumString, um Arrow Kompatibilität sicherzustellen
             visitor_df = visitor_df.astype(str)
             # Zeige die Besuchertyp-Analyse als Tabelle an
             st.dataframe(visitor_df, use_container_width=True)
@@ -225,21 +225,21 @@ def data_overview_page(df):
         st.subheader("Zeitliche Muster")
         
         try:
-            # Monthly patterns
+            # Monatliche patterns
             st.write("#### Kaufrate nach Monaten")
             monthly_fig = plot_purchase_by_month(df)
             st.plotly_chart(monthly_fig, use_container_width=True)
             
-            # Weekend vs Weekday
+            # Wochenende vs Wochentag
             st.write("#### Wochenende vs. Wochentag")
             
-            # Manuelle Berechnung der Statistiken
+            # Berechnung der Statistiken
             werktag_besuche = df[df['Weekend'] == False].shape[0]
             wochenend_besuche = df[df['Weekend'] == True].shape[0]
             werktag_konversion = df[df['Weekend'] == False]['Revenue'].mean() * 100
             wochenend_konversion = df[df['Weekend'] == True]['Revenue'].mean() * 100
             
-            # Erstelle zwei Spalten für die Anzeige
+            # Erstellt zwei Spalten für die Anzeige
             col1, col2 = st.columns(2)
             
             with col1:
@@ -250,7 +250,7 @@ def data_overview_page(df):
                 st.metric("Besuche am Wochenende", f"{wochenend_besuche:,}".replace(",", "."))
                 st.metric("Konversionsrate Wochenende", f"{wochenend_konversion:.2f}%")
             
-            # Erstellen eines Balkendiagramm für Wochenende vs. Werktag
+            # Balkendiagramm für Wochenende vs. Werktag
             weekend_data = pd.DataFrame({
                 'Zeitraum': ['Werktag', 'Wochenende'],
                 'Konversionsrate': [werktag_konversion, wochenend_konversion]
@@ -329,7 +329,7 @@ def data_overview_page(df):
     st.write(f"{len(filtered_df)} Einträge wurden ausgewählt")
     st.dataframe(filtered_df)
     
-    # Gefilterte Daten als CSV exportieren
+    # Gefilterte Daten als CSV exportieren (gem utils.py)
     csv_data = export_dataframe_to_csv(filtered_df)
     st.download_button(
         label="Als CSV herunterladen",
@@ -342,10 +342,10 @@ def ml_models_page(df):
     st.header("F9Tuned-Modell für Kaufabsichten")
     
     try:
-        # Prepare data for ML
+        # Datenvorbereitung
         X, y, X_train, X_test, y_train, y_test = prepare_data(df)
         
-        # Split settings
+        # 80/20 Split
         st.subheader("Datenaufteilung für das Training")
         col1, col2, col3 = st.columns(3)
         with col1:
@@ -359,7 +359,7 @@ def ml_models_page(df):
         st.subheader("F9Tuned-Modell")
         model_results = build_and_evaluate_models(X_train, X_test, y_train, y_test)
         
-        # Display F9Tuned metrics
+        # Daten anzeigen
         model_name = 'F9Tuned (LightGBM)'
         if isinstance(model_results, dict) and model_name in model_results:
             metrics_dict = model_results[model_name]
@@ -368,7 +368,7 @@ def ml_models_page(df):
             if not isinstance(metrics_dict, dict):
                 metrics_dict = {'Accuracy': 0, 'Precision': 0, 'Recall': 0, 'F1 Score': 0}
                 
-            # Metrikwerte extrahieren
+            # Metrikwerte generieren
             accuracy = metrics_dict.get('Accuracy', 0)
             precision = metrics_dict.get('Precision', 0)
             recall = metrics_dict.get('Recall', 0)
@@ -395,7 +395,7 @@ def ml_models_page(df):
         # Confusion Matrix and ROC Curve
         st.subheader("Modellbewertung")
         
-        # Train the best model
+        # Bestes model trainieren
         result = train_best_model(X_train, X_test, y_train, y_test)
         
         # Prüfen, ob result ein Tupel mit 3 Elementen ist
@@ -603,7 +603,7 @@ def interactive_prediction_page(df):
         Die Datei sollte die gleichen Spalten wie der Trainingsdatensatz haben.
         """)
         
-        # Upload file
+        # Upload file (Diese Funktion wurde mit Hilfe von ChatGPT integriert)
         uploaded_file = st.file_uploader("Wählen Sie eine CSV-Datei", type=["csv"])
         
         # Example download
