@@ -494,17 +494,7 @@ def interactive_prediction_page(df):
             step=0.01
         )
     
-        visitor_type = st.selectbox(
-            "Besuchertyp",
-            options=df['VisitorType'].unique(),
-            index=0
-        )
-    
-        os = st.selectbox(
-            "Betriebssystem",
-            options=sorted(df['OperatingSystems'].unique()),
-            index=0
-        )
+        
     
     with col2:
         page_values = st.slider(
@@ -533,6 +523,18 @@ def interactive_prediction_page(df):
         weekend = st.checkbox(
             "Wochenende?",
             value=False
+        )
+        
+        visitor_type = st.selectbox(
+            "Besuchertyp",
+            options=df['VisitorType'].unique(),
+            index=0
+        )
+    
+        os = st.selectbox(
+            "Betriebssystem",
+            options=sorted(df['OperatingSystems'].unique()),
+            index=0
         )
 
             
