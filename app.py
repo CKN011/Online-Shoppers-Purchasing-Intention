@@ -485,15 +485,10 @@ def interactive_prediction_page(df):
             value=float(df['BounceRates'].mean()),
             step=0.01
         )
-    
-        exit_rates = st.slider(
-            "Exit Rates",
-            min_value=0.0,
-            max_value=float(df['ExitRates'].max()),
-            value=float(df['ExitRates'].mean()),
-            step=0.01
+        weekend = st.checkbox(
+            "Wochenende?",
+            value=False
         )
-    
         
     
     with col2:
@@ -520,9 +515,12 @@ def interactive_prediction_page(df):
         )
     
     with col3:
-        weekend = st.checkbox(
-            "Wochenende?",
-            value=False
+        exit_rates = st.slider(
+            "Exit Rates",
+            min_value=0.0,
+            max_value=float(df['ExitRates'].max()),
+            value=float(df['ExitRates'].mean()),
+            step=0.01
         )
         
         visitor_type = st.selectbox(
