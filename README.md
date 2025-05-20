@@ -45,6 +45,10 @@ Das optimierte F9Tuned RandomForest-Modell erreicht eine Accuracy von 89,7% und 
 
 Beiträge sind willkommen! Bitte lesen Sie unsere Beitragsrichtlinien, bevor Sie Pull Requests einreichen.
 
+## Hilfsmittel
+Zur Fehlerbehebung wurden ChatGPT und Replit verwendet. 
+Ausserdem wurden Teile der App mit Hilfe von Replit/ChatGPT erstellt, darauf wurde im Code direkt verwiesen. 
+
 ## Lizenz
 
 Das verwendete UCI Datenset steht unter einer CC BY 4.0 Lizenz
