@@ -467,23 +467,20 @@ def interactive_prediction_page(df):
         unterschiedliche Kundensegmente zu prognostizieren.
         """)
         
-        # Inputs for prediction
+      # Inputs for prediction
         col1, col2, col3 = st.columns(3)
         
         with col1:
-            visitor_type = st.selectbox(
                 "Besuchertyp",
                 options=df['VisitorType'].unique(),
                 index=0
             )
             
-            browser = st.selectbox(
                 "Browser",
                 options=sorted(df['Browser'].unique()),
                 index=0
             )
             
-            os = st.selectbox(
                 "Betriebssystem",
                 options=sorted(df['OperatingSystems'].unique()),
                 index=0
@@ -501,7 +498,6 @@ def interactive_prediction_page(df):
                 value=False
             )
             
-            special_day = st.slider(
                 "Nähe zu einem speziellen Tag (0 = weit entfernt, 1 = sehr nah)",
                 min_value=0.0,
                 max_value=1.0,
@@ -510,7 +506,6 @@ def interactive_prediction_page(df):
             )
         
         with col3:
-            page_values = st.slider(
                 "Page Values",
                 min_value=0.0,
                 max_value=float(df['PageValues'].max()),
@@ -518,7 +513,6 @@ def interactive_prediction_page(df):
                 step=10.0
             )
             
-            bounce_rates = st.slider(
                 "Bounce Rates",
                 min_value=0.0,
                 max_value=float(df['BounceRates'].max()),
@@ -526,7 +520,6 @@ def interactive_prediction_page(df):
                 step=0.01
             )
             
-            exit_rates = st.slider(
                 "Exit Rates",
                 min_value=0.0,
                 max_value=float(df['ExitRates'].max()),
@@ -540,7 +533,6 @@ def interactive_prediction_page(df):
         col1, col2 = st.columns(2)
         
         with col1:
-            administrative = st.slider(
                 "Administrative Seiten Besuche",
                 min_value=0,
                 max_value=int(df['Administrative'].max()),
@@ -554,7 +546,6 @@ def interactive_prediction_page(df):
                 value=0
             )
             
-            product_related = st.slider(
                 "Product Related Seiten Besuche",
                 min_value=0,
                 max_value=int(df['ProductRelated'].max()),
@@ -562,7 +553,6 @@ def interactive_prediction_page(df):
             )
         
         with col2:
-            administrative_duration = st.slider(
                 "Administrative Seiten Verweildauer (s)",
                 min_value=0.0,
                 max_value=float(df['Administrative_Duration'].max()),
@@ -576,7 +566,6 @@ def interactive_prediction_page(df):
                 value=0.0
             )
             
-            product_related_duration = st.slider(
                 "Product Related Seiten Verweildauer (s)",
                 min_value=0.0,
                 max_value=float(df['ProductRelated_Duration'].max()),
