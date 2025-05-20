@@ -47,9 +47,13 @@ Beiträge sind willkommen! Bitte lesen Sie unsere Beitragsrichtlinien, bevor Sie
 
 ## Lizenz
 
-Dieses Projekt steht unter der MIT-Lizenz.
+Das verwendete UCI Datenset steht unter einer CC BY 4.0 Lizenz
+https://archive.ics.uci.edu/dataset/468/online+shoppers+purchasing+intention+dataset
 
 ## Danksagungen
 
 - UCI Machine Learning Repository für den "Online Shoppers Purchasing Intention" Datensatz
 - Alle Mitwirkenden, die zu diesem Projekt beigetragen haben
+
+## Weiteres 
+Dieses README Dokument wurde mit Hilfe von ChatGPT generiert und manuell angepasst
