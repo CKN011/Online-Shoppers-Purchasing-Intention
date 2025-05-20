@@ -469,80 +469,72 @@ def interactive_prediction_page(df):
         
       # Inputs for prediction
         col1, col2, col3 = st.columns(3)
-        
-        with col1:
-            informational = st.slider(
-                "Informational Seiten Besuche",
-                min_value=0,
-                max_value=int(df['Informational'].max()),
-                value=0
-            )
-            
+    
+    with col1:
+        informational = st.slider(
+            "Informational Seiten Besuche",
+            min_value=0,
+            max_value=int(df['Informational'].max()),
+            value=0
+        )
+    
+        bounce_rates = st.slider(
             "Bounce Rates",
-                min_value=0.0,
-                max_value=float(df['BounceRates'].max()),
-                value=float(df['BounceRates'].mean()),
-                step=0.01
-            )
-            
+            min_value=0.0,
+            max_value=float(df['BounceRates'].max()),
+            value=float(df['BounceRates'].mean()),
+            step=0.01
+        )
+    
+        exit_rates = st.slider(
             "Exit Rates",
-                min_value=0.0,
-                max_value=float(df['ExitRates'].max()),
-                value=float(df['ExitRates'].mean()),
-                step=0.01
-            )
-            
+            min_value=0.0,
+            max_value=float(df['ExitRates'].max()),
+            value=float(df['ExitRates'].mean()),
+            step=0.01
+        )
+    
+        visitor_type = st.selectbox(
+            "Besuchertyp",
+            options=df['VisitorType'].unique(),
+            index=0
+        )
+    
+        os = st.selectbox(
+            "Betriebssystem",
+            options=sorted(df['OperatingSystems'].unique()),
+            index=0
+        )
+    
+    with col2:
+        page_values = st.slider(
+            "Page Values",
+            min_value=0.0,
+            max_value=float(df['PageValues'].max()),
+            value=0.0,
+            step=10.0
+        )
+    
+        special_day = st.slider(
+            "Nähe zu einem speziellen Tag (0 = weit entfernt, 1 = sehr nah)",
+            min_value=0.0,
+            max_value=1.0,
+            value=0.0,
+            step=0.01
+        )
+    
+        month = st.selectbox(
+            "Monat",
+            options=sorted(df['Month'].unique()),
+            index=0
+        )
+    
+    with col3:
+        weekend = st.checkbox(
+            "Wochenende?",
+            value=False
+        )
 
-            
-            
-                "Besuchertyp",
-                options=df['VisitorType'].unique(),
-                index=0
-            )
-            
-            
-                "Betriebssystem",
-                options=sorted(df['OperatingSystems'].unique()),
-                index=0
-            )
-        
-        with col2:
-              "Page Values",
-                min_value=0.0,
-                max_value=float(df['PageValues'].max()),
-                value=0.0,
-                step=10.0
-            )
-            
-                "Nähe zu einem speziellen Tag (0 = weit entfernt, 1 = sehr nah)",
-                min_value=0.0,
-                max_value=1.0,
-                value=0.0,
-                step
-
-
-            month = st.selectbox(
-                "Monat",
-                options=sorted(df['Month'].unique()),
-                index=0
-            )
-
-         with col3:
-
-            weekend = st.checkbox(
-                "Wochenende?",
-                value=False
-            )
-             "Besuchertyp",
-                options=df['VisitorType'].unique(),
-                index=0
-            )
-            
-            
-                "Betriebssystem",
-                options=sorted(df['OperatingSystems'].unique()),
-                index=0
-            )
             
                 
         # Create input dataframe for prediction
